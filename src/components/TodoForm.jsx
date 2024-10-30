@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const TodoForm = () => {
+const TodoForm = ({addTask}) => {
+    const [userInput, setUserInput] = useState('');
+    const handleChange = (event) => {
+        setUserInput(event.target.value);
+    };
+        const handleSubmit = (event) => {
+            event.preventDefault();
+            addTask(userInput);
+            setUserInput("");
+        }
     return (
-        <div>
-           hi 
-        </div>
+        <form className='todo-form' onSubmit={handleSubmit}>
+            <input type='text' 
+                placeholder='Добавь новую задачу' 
+                    onChange={handleChange} 
+                        value={userInput}
+                        className="todo-input" 
+                        />
+                        <button className='todo-button'>Сохранить</button>
+        </form>
     );
 };
 
